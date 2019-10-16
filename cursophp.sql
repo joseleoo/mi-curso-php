@@ -1,0 +1,2 @@
+CREATE TABLE `cursophp`.`jobs` ( `id` INT NOT NULL AUTO_INCREMENT , `title` TEXT NOT NULL , `description` TEXT NOT NULL , `visible` BOOLEAN NOT NULL , `months` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `cursophp`.`projects` ( `id` INT NOT NULL AUTO_INCREMENT , `title` TEXT NOT NULL , `description` TEXT NOT NULL , `visible` INT NOT NULL , `months` INT NOT NULL , `created_at` DATETIME NULL , `updated_at` DATETIME NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

@@ -1,0 +1,18 @@
+{
+    "cSpell.words": [
+        "Diactoros",
+        "cursophp",
+        "zendframework"
+    ],
+    "sqltools.connections": [
+        {
+            "askForPassword": false,
+            "database": "cursophp",
+            "dialect": "MariaDB",
+            "name": "mysql",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
