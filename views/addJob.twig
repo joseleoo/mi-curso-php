@@ -6,11 +6,14 @@
     {{responseMessage}}
 </div>
 
-<form action="/curso-introduccion-php-21-eloquent/jobs/add" method="post">
+<form action="/curso-introduccion-php-21-eloquent/jobs/add" method="post" enctype="multipart/form-data">
     <label for="">Title:</label>
     <input type="text" name="title"><br>
     <label for="">Description:</label>
     <input type="text" name="description"><br>
+    <label for="">Nombre de Archivo:</label>
+    <input type="text" name="filename"><br>
+    <input type="file" name="logo"><br>
     <button type="submit">Save</button>
 </form>
 {% endblock %}

@@ -8,7 +8,7 @@ class IndexController extends BaseController{
    
         $jobs = Job::all();
 
-        $project1 = new Project('Project 1', 'Description 1');
+        $project1 = new Project('Project 1', 'Description 1','logo 1');
         $projects = [
             $project1
         ];
