@@ -45,9 +45,20 @@ $map->get('addJobs', '/curso-introduccion-php-21-eloquent/jobs/add', [
     'controller'=>'App\Controllers\JobsController',
     'action'=>'getAddJobAction'
 ]);
+
 $map->post('saveJobs', '/curso-introduccion-php-21-eloquent/jobs/add', [
     'controller'=>'App\Controllers\JobsController',
     'action'=>'getAddJobAction'
+]);
+
+$map->get('addUsers', '/curso-introduccion-php-21-eloquent/users/add', [
+    'controller'=>'App\Controllers\UserController',
+    'action'=>'getAddUserAction'
+]);
+
+$map->post('SaveUsers', '/curso-introduccion-php-21-eloquent/users/add', [
+    'controller'=>'App\Controllers\UserController',
+    'action'=>'getAddUserAction'
 ]);
 
 $matcher = $routerContainer->getMatcher();
