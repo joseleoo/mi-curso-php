@@ -15,7 +15,7 @@ class UserController extends BaseController
         if ($request->getMethod() == 'POST') {
 
             $postData = $request->getParsedBody();
-            $userValidator = v::key('name', v::stringType()->notEmpty())
+            $userValidator = v::key('email', v::stringType()->notEmpty())
                 ->key('password', v::stringType()->notEmpty());       
 
             try {
@@ -23,7 +23,7 @@ class UserController extends BaseController
                 $postData = $request->getParsedBody();
                           
                 $user = new User();
-                $user->name = $postData['name'];
+                $user->name = $postData['email'];
                 $user->password = password_hash($postData['password'], PASSWORD_DEFAULT);             
                 $user->save();
 

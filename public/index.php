@@ -61,6 +61,16 @@ $map->post('SaveUsers', '/curso-introduccion-php-21-eloquent/users/add', [
     'action'=>'getAddUserAction'
 ]);
 
+$map->get('loginForm', '/curso-introduccion-php-21-eloquent/login', [
+    'controller'=>'App\Controllers\AuthController',
+    'action'=>'getLogin'
+]);
+
+$map->post('auth', '/curso-introduccion-php-21-eloquent/auth', [
+    'controller'=>'App\Controllers\AuthController',
+    'action'=>'postLogin'
+]);
+
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
 
