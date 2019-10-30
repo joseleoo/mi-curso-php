@@ -4,6 +4,7 @@ ini_set('display_starup_error', 1);
 error_reporting(E_ALL);
 
 require_once '../vendor/autoload.php';
+session_start();
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Aura\Router\RouterContainer;
@@ -43,7 +44,8 @@ $map->get('index', '/curso-introduccion-php-21-eloquent/', [
 ]);
 $map->get('addJobs', '/curso-introduccion-php-21-eloquent/jobs/add', [
     'controller' => 'App\Controllers\JobsController',
-    'action' => 'getAddJobAction'
+    'action' => 'getAddJobAction',
+    'auth' => true
 ]);
 
 $map->post('saveJobs', '/curso-introduccion-php-21-eloquent/jobs/add', [
@@ -53,7 +55,8 @@ $map->post('saveJobs', '/curso-introduccion-php-21-eloquent/jobs/add', [
 
 $map->get('addUsers', '/curso-introduccion-php-21-eloquent/users/add', [
     'controller' => 'App\Controllers\UserController',
-    'action' => 'getAddUserAction'
+    'action' => 'getAddUserAction',
+    'auth' => true
 ]);
 
 $map->post('SaveUsers', '/curso-introduccion-php-21-eloquent/users/add', [
@@ -66,9 +69,20 @@ $map->get('loginForm', '/curso-introduccion-php-21-eloquent/login', [
     'action' => 'getLogin'
 ]);
 
+$map->get('logout', '/curso-introduccion-php-21-eloquent/logout', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'getLogout'
+]);
+
 $map->post('auth', '/curso-introduccion-php-21-eloquent/auth', [
     'controller' => 'App\Controllers\AuthController',
     'action' => 'postLogin'
+]);
+
+$map->get('admin', '/curso-introduccion-php-21-eloquent/admin', [
+    'controller' => 'App\Controllers\AdminController',
+    'action' => 'getIndex',
+    'auth' => true
 ]);
 
 $matcher = $routerContainer->getMatcher();
@@ -99,6 +113,15 @@ if (!$route) {
     $handlerData = $route->handler;
     $controllerName = $handlerData['controller'];
     $actionName = $handlerData['action'];
+    $needsAuth = $handlerData['auth']?? false;
+
+
+    $sessionUserId=$_SESSION['userId'] ?? null;
+    if($needsAuth && !$sessionUserId){
+
+        echo 'Acceso restringido';
+        die;
+    }
 
     $controller = new $handlerData['controller'];
     $response =   $controller->$actionName($request);
