@@ -7,7 +7,7 @@ require_once '../vendor/autoload.php';
 session_start();
 
 $dotenv = Dotenv\Dotenv::create(__DIR__ . '/..');
-$dotenv->load();
+// $dotenv->load();
 
 
 
