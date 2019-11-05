@@ -45,7 +45,7 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
-$path = getenv('DB_DRIVER') == 'mysql' ? '/curso-introduccion-php-21-eloquent/' : '/';
+$path = getenv('DB_DRIVER') == 'mysql' ? '/' : '/';
 
 $map->get('index', $path , [
     'controller' => 'App\Controllers\IndexController',
