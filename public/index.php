@@ -45,48 +45,50 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
 
 $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
-$map->get('index', '/', [
+$path = getenv('DB_DRIVER') == 'mysql' ? '/curso-introduccion-php-21-eloquent/' : '/';
+
+$map->get('index', $path , [
     'controller' => 'App\Controllers\IndexController',
     'action' => 'indexAction'
 ]);
-$map->get('addJobs', '/curso-introduccion-php-21-eloquent/jobs/add', [
+$map->get('addJobs', $path.'jobs/add', [
     'controller' => 'App\Controllers\JobsController',
     'action' => 'getAddJobAction',
     'auth' => true
 ]);
 
-$map->post('saveJobs', '/curso-introduccion-php-21-eloquent/jobs/add', [
+$map->post('saveJobs', $path.'jobs/add', [
     'controller' => 'App\Controllers\JobsController',
     'action' => 'getAddJobAction'
 ]);
 
-$map->get('addUsers', '/curso-introduccion-php-21-eloquent/users/add', [
+$map->get('addUsers', $path.'users/add', [
     'controller' => 'App\Controllers\UserController',
     'action' => 'getAddUserAction',
     'auth' => true
 ]);
 
-$map->post('SaveUsers', '/curso-introduccion-php-21-eloquent/users/add', [
+$map->post('SaveUsers', $path.'users/add', [
     'controller' => 'App\Controllers\UserController',
     'action' => 'getAddUserAction'
 ]);
 
-$map->get('loginForm', '/curso-introduccion-php-21-eloquent/login', [
+$map->get('loginForm', $path.'login', [
     'controller' => 'App\Controllers\AuthController',
     'action' => 'getLogin'
 ]);
 
-$map->get('logout', '/curso-introduccion-php-21-eloquent/logout', [
+$map->get('logout', $path.'logout', [
     'controller' => 'App\Controllers\AuthController',
     'action' => 'getLogout'
 ]);
 
-$map->post('auth', '/curso-introduccion-php-21-eloquent/auth', [
+$map->post('auth', $path.'auth', [
     'controller' => 'App\Controllers\AuthController',
     'action' => 'postLogin'
 ]);
 
-$map->get('admin', '/curso-introduccion-php-21-eloquent/admin', [
+$map->get('admin', $path.'admin', [
     'controller' => 'App\Controllers\AdminController',
     'action' => 'getIndex',
     'auth' => true
@@ -120,11 +122,11 @@ if (!$route) {
     $handlerData = $route->handler;
     $controllerName = $handlerData['controller'];
     $actionName = $handlerData['action'];
-    $needsAuth = $handlerData['auth']?? false;
+    $needsAuth = $handlerData['auth'] ?? false;
 
 
-    $sessionUserId=$_SESSION['userId'] ?? null;
-    if($needsAuth && !$sessionUserId){
+    $sessionUserId = $_SESSION['userId'] ?? null;
+    if ($needsAuth && !$sessionUserId) {
 
         echo 'Acceso restringido';
         die;
@@ -139,7 +141,7 @@ if (!$route) {
             header(sprintf('%s: %s', $name, $value), false);
         }
     }
-    
+
     http_response_code($response->getStatusCode());
     echo $response->getBody();
 }
